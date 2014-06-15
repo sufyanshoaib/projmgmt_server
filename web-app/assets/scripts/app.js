@@ -24,7 +24,7 @@ pmApp.config(['$routeProvider',
         $routeProvider
             .when('/', {
                 templateUrl: 'assets/views/project_list.html',
-                controller: "ProjectDetailController"})
+                controller: "ProjectList"})
             .when('/login', {
                 templateUrl: 'assets/views/login.html',
                 controller: 'LoginController'
@@ -47,6 +47,10 @@ pmApp.config(['$routeProvider',
 
 pmApp.run(['$rootScope', '$http', '$location',
     function ($rootScope, $http, $location) {
+        if(getCurrentUser()){
+            $rootScope.isAuthenticated = true;
+            $rootScope.currentUser = getCurrentUser();
+        }
         $http.defaults.headers.common['X-AUTH-TOKEN'] = getLocalToken();
          console.log("local token:" + getLocalToken())
         $rootScope.$on('event:auth-loginRequired', function () {
@@ -72,7 +76,21 @@ pmApp.run(['$rootScope', '$http', '$location',
         });
     }]);
 function getLocalToken() {
-    return localStorage["authToken"];
+    console.log("gett local token:" + sessionStorage["authToken"])
+    return sessionStorage["authToken"];
+}
+function setLocalToken(value) {
+    sessionStorage["authToken"] = value;
+    console.log("setting local token:" + value)
+}
+
+function getCurrentUser() {
+    console.log("gett local currentUser:" + sessionStorage["currentUser"])
+    return sessionStorage["currentUser"];
+}
+function setCurrentUser(value) {
+    sessionStorage["currentUser"] = value;
+    console.log("setting local currentUser:" + value)
 }
 
 function getHttpConfig() {

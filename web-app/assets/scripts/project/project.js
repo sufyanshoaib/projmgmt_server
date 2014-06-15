@@ -25,9 +25,11 @@ projectController.controller('ProjectList', ['$scope', 'ProjectService',
 projectController.controller('ProjectDetailController', ['$scope', '$routeParams', 'ProjectService', 'TaskService',
     function ($scope, $routeParams, ProjectService, TaskService) {
         console.log('project get function ' + ProjectService.AllProjects)
+
         $scope.project = ProjectService.Project.get({projectId: $routeParams.projectId}, function () {
             //console.log("Project object", project.id)
         });
+        console.log($routeParams.projectId)
         $scope.tasks = TaskService.Task.query({projectId: $routeParams.projectId}, function () {
             //console.log("Project object", project.id)
         });

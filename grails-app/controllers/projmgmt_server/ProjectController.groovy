@@ -8,6 +8,8 @@ class ProjectController /*extends RestfulController*/{
 
     static responseFormats = ['json', 'xml']
 
+    def springSecurityService
+
    /* ProjectController(){
         super(Project)
     }*/
@@ -16,24 +18,28 @@ class ProjectController /*extends RestfulController*/{
 
     def index(){
         println('in index')
-        render Project.list() as JSON
+        def loggedUser = springSecurityService?.currentUser
+
+        render Project.findAllByOwner(loggedUser) as JSON
     }
 
     def show(String projectId){
         println("params.projectId: ${params} , ${projectId}")
         /*def project = Project.collection.findOne(id: projectId)
         project = project as Project
-
-
         //render project?:"" as JSON
         respond project*/
-        def project = Project.findById(params.id)
+
+        println("springSecurityService: ${springSecurityService?.currentUser}")
+        def loggedUser = springSecurityService?.currentUser
+
+        def project = Project.findByIdAndOwner(params.id, loggedUser)
         if(project){
             def tasks = Task.findAllByProject(project)
             println("tasks: ${tasks}")
             project.tasks = tasks
         }
         println("project   dd: ${project as JSON}")
-        render project as JSON
+        render project?:[:] as JSON
     }
 }

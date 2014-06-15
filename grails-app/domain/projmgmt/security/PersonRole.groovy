@@ -36,15 +36,17 @@ class PersonRole implements Serializable{
     }
 
     static PersonRole get(long personId, long roleId) {
+        println("get from person role")
         PersonRole.where {
             person == Person.load(personId) &&
                     role == Role.load(roleId)
         }.get()
     }
 
-    static PersonRole create(Person person, Role role, boolean flush = false) {
+/*    static PersonRole create(Person person, Role role, boolean flush = false) {
         new PersonRole(person: person, role: role).save(flush: flush, insert: true)
-    }
+    }*/
+/*
 
     static boolean remove(Person u, Role r, boolean flush = false) {
 
@@ -67,6 +69,7 @@ class PersonRole implements Serializable{
             role == Role.load(r.id)
         }.deleteAll()
     }
+*/
 
 
 }

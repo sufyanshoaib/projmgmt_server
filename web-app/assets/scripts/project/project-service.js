@@ -16,8 +16,8 @@ projectService.factory('ProjectService', ['$resource',
     function ($resource) {
          //console.log('loading ProjectService')
         return {
-            AllProjects: $resource('apiv1/project', {}),
-            Project: $resource('api/project/:projectId', {projectId: '@projectId'})
+            AllProjects: $resource('api/project', {}, getHttpConfig()),
+            Project: $resource('api/project/:projectId', {projectId: '@projectId'}, getHttpConfig())
             /*PostComments: $resource('v1/posts/:postId/comments', {postId: '@id'}),
             PostTags: $resource('v1/posts/tags/:tag', {tag: '@id'})*/
         };

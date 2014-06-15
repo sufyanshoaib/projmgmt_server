@@ -19,4 +19,9 @@ class Role implements Serializable{
         authority blank: false, unique: true
     }
 
+    def String getAuthority(){
+        println("getting authority: ${this.authority}" )
+        return this.authority
+    }
+
 }

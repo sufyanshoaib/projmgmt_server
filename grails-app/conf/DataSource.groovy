@@ -43,6 +43,8 @@ environments {
     }
 }
 */
+
+//MongoDB connection///
 // environment specific settings
 environments {
     development {

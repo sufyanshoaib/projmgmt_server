@@ -1,11 +1,13 @@
 package projmgmt_server
 
-class UrlFilters {
+import com.odobo.grails.plugin.springsecurity.rest.RestAuthenticationFilter
+
+class UrlFilters extends  RestAuthenticationFilter{
 
     def filters = {
         all(uri:"/**"){
             before = {
-                 println("filter... ${params}")
+                 println("filter... ${params}, ${request}")
             }
             after = { Map model ->
 

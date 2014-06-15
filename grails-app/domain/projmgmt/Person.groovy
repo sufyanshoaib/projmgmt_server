@@ -11,6 +11,10 @@ class Person implements Serializable{
     String username
     String name
     String password
+    boolean enabled = true
+    boolean accountExpired
+    boolean accountLocked
+    boolean passwordExpired
 
 
     static constraints = {
@@ -26,7 +30,24 @@ class Person implements Serializable{
     }*/
 
     Set<Role> getAuthorities() {
-        PersonRole.findAllByPerson(this).collect { it.role } as Set
+        println("person.getauthorities: ${this.username}")
+        def authorities = PersonRole.findAllByPerson(this).collect { it.role } as Set
+        println("person.getauthorities: ${authorities}")
+        return authorities
     }
 
+
+    def beforeInsert() {
+        encodePassword()
+    }
+
+    def beforeUpdate() {
+        if (isDirty('password')) {
+            encodePassword()
+        }
+    }
+
+    protected void encodePassword() {
+        password = springSecurityService.encodePassword(password)
+    }
 }

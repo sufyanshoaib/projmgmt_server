@@ -13,8 +13,8 @@
 var authController = angular.module('pmApp');
 
 
-authController.controller('LoginController', ['$rootScope', '$scope', '$http', 'authService',
-    function ($rootScope, $scope, $http, authService) {
+authController.controller('LoginController', ['$rootScope', '$scope', '$http', 'authService', '$location',
+    function ($rootScope, $scope, $http, authService, $location) {
         console.log('loginController called');
 
         $scope.logIn = function () {
@@ -26,6 +26,7 @@ authController.controller('LoginController', ['$rootScope', '$scope', '$http', '
                     console.log('authentication username: ' + data.username);
                     $rootScope.isAuthenticated = true;
                     $rootScope.currentUser = data.username;
+                    setCurrentUser(data.username)
                     setLocalToken(data.token);
                     authService.loginConfirmed({}, function (config) {
                         if (!config.headers["X-Auth-Token"]) {
@@ -34,6 +35,8 @@ authController.controller('LoginController', ['$rootScope', '$scope', '$http', '
                         }
                         return config;
                     });
+                    console.log("redirecting to home")
+                    $location.path("/")
                 }).
                 error(function (data) {
                     console.log('login error: ' + data);
@@ -57,24 +60,25 @@ authController.controller('LoginController', ['$rootScope', '$scope', '$http', '
         }
     }]);
 
-authController.controller('LogoutController',
-    function ($scope, $http, $location) {
+authController.controller('LogoutController', ['$rootScope', '$scope', '$http', '$location',
+    function ($rootScope, $scope, $http, $location) {
         console.log('logoutController called');
 
         $scope.logOut = function() {
             console.log('logOut called');
 
-            $http.post('api/logout', {}, getHttpConfig()).
+            $http.post('auth/api/logout', {}, getHttpConfig()).
                 success(function() {
                     console.log('logout success');
-                    localStorage.clear();
-                    $location.path("/")
+                    sessionStorage.clear();
+                    $rootScope.isAuthenticated = false;
+                    $location.path("/login")
                 }).
                 error(function(data) {
                     console.log('logout error: ' + data);
                 });
         }
-    }
+    }]
 );
 
 

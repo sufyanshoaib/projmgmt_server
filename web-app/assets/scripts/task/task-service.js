@@ -16,11 +16,11 @@ taskService.factory('TaskService', ['$resource',
     function ($resource) {
         //console.log('loading ProjectService')
         return {
-            Task: $resource('api/project/:projectId/tasks', {projectId: '@projectId'}),
+            Task: $resource('api/project/:projectId/tasks', {projectId: '@projectId'}, getHttpConfig()),
             /*PostComments: $resource('v1/posts/:postId/comments', {postId: '@id'}),
              PostTags: $resource('v1/posts/tags/:tag', {tag: '@id'})*/
-            SaveTask: $resource('api/task/', {}, {save: {method: 'POST' }}),
-            CreateTask: $resource('api/task/create', {projectId: '@projectId'} )
+            SaveTask: $resource('api/task/', {}, {save: {method: 'POST' }}, getHttpConfig()),
+            CreateTask: $resource('api/task/create', {projectId: '@projectId'}, getHttpConfig() )
         };
 
     }]);

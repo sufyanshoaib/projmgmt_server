@@ -15,7 +15,7 @@ personService.factory('PersonService', ['$resource',
     function ($resource) {
         //console.log('loading ProjectService')
         return {
-            Persons:  $resource('person', {})
+            Persons:  $resource('person', {}, getHttpConfig())
         };
 
     }]);

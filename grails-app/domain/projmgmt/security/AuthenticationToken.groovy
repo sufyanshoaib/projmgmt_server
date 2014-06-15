@@ -10,4 +10,9 @@ package projmgmt.security
 class AuthenticationToken {
     String username
     String token
+
+    def String getUsername(){
+        println("getting username: ${this.username}")
+        return this.username;
+    }
 }
