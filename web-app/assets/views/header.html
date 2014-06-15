@@ -1,0 +1,12 @@
+<div class="header">
+    <ul class="nav nav-pills pull-right" ng-show="isAuthenticated" g-controller="LogoutController">
+        <li>Welcome, {{currentUser}}.</li>
+        <li class="active"><a ng-href="#/projects" >Projects List</a></li>
+        <!--<li><a ng-href="#">About</a></li>
+        <li><a ng-href="#">Contact</a></li>-->
+        <li class="active">
+             <a href="" ng-click="logOut()">Log out</a>
+        </li>
+    </ul>
+    <h3 class="text-muted">Project Management Tool</h3>
+</div>

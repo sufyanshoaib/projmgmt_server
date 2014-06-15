@@ -1,0 +1,47 @@
+<div class="row"  ng-controller="LoginController">
+    <!--<div id="register-header">
+        <div class="col-lg-5">
+            <h3>Register</h3>
+            <form name="registrationForm" role="form" ng-submit="register()" autocomplete="off">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input id="username" class="form-control" type="text" ng-model="registerData.username"/>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input id="password" class="form-control" type="password" ng-model="registerData.password"/>
+                </div>
+                <input type="submit" class="btn btn-primary" value="Register"/>
+            </form>
+        </div>
+        <div class="col-lg-5">
+            <h3>Already signed up?</h3>
+            <p>Then go ahead and <a href="#" ng-click="goToDashboard()">log in</a>.</p>
+        </div>
+    </div>-->
+    <div id="login-holder">
+        <div class="col-lg-5">
+            <div id="login-error" class="alert alert-error" style="display:none;">
+                <button type="button" class="close" onclick="$('#login-error').hide();">&times;</button>
+                Username and/or password incorrect.
+            </div>
+            <div id="loginbox">
+                <div id="login-inner">
+                    <form name="loginForm" role="form" autocomplete="off">
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input id="username" class="form-control" type="text" ng-model="authData.username"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input id="password" class="form-control" type="password" ng-model="authData.password"/>
+                        </div>
+                        <input type="submit" class="btn btn-primary" ng-click="logIn()"  value="Login"/>
+                        <input type="submit" class="btn btn-primary" ng-click="register()"  value="Register"/>
+                    </form>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+</div>

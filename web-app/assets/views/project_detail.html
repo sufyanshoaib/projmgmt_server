@@ -1,0 +1,40 @@
+<div class="row clearfix">
+    <div class="col-md-12 column">
+        <div class="panel panel-default">
+            <div class="panel-heading">{{project.name}} </div>
+            <div class="list-group-item1">
+                <dl class="dl-horizontal">
+                    <dt>Owner</dt><dd>{{project.owner.name}}&nbsp;</dd>
+                    <dt>Created Date</dt><dd>{{project.dateCreated}}&nbsp;</dd>
+                </dl>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">Tasks <span ng-show="tasks != null">({{tasks.length}})</span><span class="pull-right"><a ng-href="#/projects/{{project.id}}/tasks/create">Create Task</span> </div>
+            <!--<a href="#" class="list-group-item active">Projects</a>-->
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Title</th>
+                    <th>Assigned To</th>
+                    <th>Status</th>
+                    <th>Priority</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="task in tasks">
+                    <td><a href="#/projects/{{project.id}}">{{task.id}}</a></td>
+                    <td><a href="#/projects/{{project.id}}">{{task.title}}</a></td>
+                    <td><a href="#/projects/{{project.id}}">{{task.assignedTo.name}}</a></td>
+                    <td><a href="#/projects/{{project.id}}">{{task.status.name}}</a></td>
+                    <td><a href="#/projects/{{project.id}}">{{task.priority.name}}</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

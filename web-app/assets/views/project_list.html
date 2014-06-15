@@ -1,0 +1,25 @@
+<div class="row clearfix">
+    <div class="col-md-12 column">
+        <div class="panel panel-default">
+            <!--<div class="list-group-item active"><a href="#" >Projects</a><span class="pull-right">test</span> </div>-->
+            <div class="panel-heading">Projects<span class="pull-right"><a href="#/projects/create" >Create Project</a></span></div>
+            <div class="panel-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="project in projects">
+                        <td><a href="#/projects/{{project.id}}">{{project.id}}</a></td>
+                        <td><a href="#/projects/{{project.id}}">{{project.name}}</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
+     </div>
+</div>
+

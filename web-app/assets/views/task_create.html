@@ -1,0 +1,40 @@
+<div class="panel panel-default" ng-controller="TaskCreateController">
+    <div class="panel-heading">Create task</div>
+    <div class="panel-body">
+        <form name="taskForm" novalidate ng-submit="taskSubmit()" class="form-horizontal ng-valid ng-dirty" > <!--ng-controller="TaskFormController"-->
+            <div class="form-group">
+                <label class="col-md-2">Project</label>
+                <div class="col-md-10">{{project.name}}</div>
+            </div>
+            <div class="form-group">
+                <label for="title" class="col-md-2">Title</label>
+                <div class="col-md-10">
+                    <input id="title" name="title" type="text"  ng-model="task.title" >
+                    <!--ng-class="{'ng-invalid': taskForm.title.$invalid }"-->
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="description" class="col-md-2">Description</label>
+                <div class="col-md-10"><input id="description" name="task.description" type="text" ng-model="task.description" ></div>
+            </div>
+
+            <div class="form-group">
+                <label for="description" class="col-md-2">Priority</label>
+                <div class="col-md-10"><select id="priority" ng-model="task.priority" ng-options="priority.name for priority in priorities" ></select></div>
+            </div>
+
+            <div class="form-group">
+                <label for="description" class="col-md-2">Status</label>
+                <div class="col-md-10"><select id="status" ng-model="task.status" ng-options="status.name for status in statuses" ></select></div>
+            </div>
+
+            <div class="form-group">
+                <label for="description" class="col-md-2">Assigned To</label>
+                <div class="col-md-10"><select id="assignedTo" ng-model="task.assignedTo" ng-options="assignee.name for assignee in assignees" ></select></div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" data-loading-text="Saving.."  >Submit</button>
+            <!--ng-disabled="form.$invalid"-->
+        </form>
+    </div>
+</div>
