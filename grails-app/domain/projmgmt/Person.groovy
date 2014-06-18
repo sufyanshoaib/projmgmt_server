@@ -9,7 +9,7 @@ class Person implements Serializable{
     transient springSecurityService
 
     String username
-    String name
+    //String name
     String password
     boolean enabled = true
     boolean accountExpired
@@ -19,7 +19,7 @@ class Person implements Serializable{
 
     static constraints = {
         username unique: true, nullable: false
-        name nullable: true
+        //name nullable: true
         password nullable: false
     }
 

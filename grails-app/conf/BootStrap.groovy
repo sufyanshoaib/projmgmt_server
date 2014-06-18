@@ -13,8 +13,9 @@ class BootStrap {
          println(roleAdmin)
         Person admin = Person.findByUsername("admin") ?:
             new Person(username: 'admin',
-                    password: 'sufyan123',
-                    name: 'Sufyan'/*,*/
+                    password: 'sufyan123'/*,
+                    name: 'Sufyan'*/
+                    /*,*/
                     /*authorities: [roleAdmin]*/).save(failOnError: true)
 
         PersonRole.findByPersonAndRole(admin, roleAdmin)?:

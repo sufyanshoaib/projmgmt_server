@@ -10,16 +10,15 @@
 
 /* Services */
 
-var taskService = angular.module('pmApp');
+var commentService = angular.module('pmApp');
 
-taskService.factory('TaskService', ['$resource',
+commentService.factory('TaskService', ['$resource',
     function ($resource) {
         //console.log('loading ProjectService')
         return {
-            Tasks: $resource('api/projects/:projectId/tasks', {projectId: '@projectId'}, getHttpConfig()),
+            Comments: $resource('api/project/:projectId/tasks/:taskId/comments', {projectId: '@projectId', taskId: '@taskId'}, getHttpConfig()),
             /*PostComments: $resource('v1/posts/:postId/comments', {postId: '@id'}),
              PostTags: $resource('v1/posts/tags/:tag', {tag: '@id'})*/
-            Task: $resource('api/projects/:projectId/tasks/:taskId', {projectId: '@projectId', taskId: '@taskId'}, getHttpConfig()),
             SaveTask: $resource('api/task/', {}, {save: {method: 'POST' }}, getHttpConfig()),
             CreateTask: $resource('api/task/create', {projectId: '@projectId'}, getHttpConfig() )
         };

@@ -8,17 +8,49 @@ import projmgmt.PriorityEnum
 import projmgmt.Project
 import projmgmt.StatusEnum
 import projmgmt.Task
+import projmgmt.Comment
 
-class TaskController extends RestfulController {
+class TaskController /*extends RestfulController*/ {
     static responseFormats = ['json', 'xml']
 
-    static allowedMethods = [save: "POST"/*, update: "PUT", delete: "DELETE", comments: "POST"*/]
+    def springSecurityService
+
+    static allowedMethods = [save: "POST" , show: "GET" /*, update: "PUT", delete: "DELETE", comments: "POST"*/]
+/*
 
     TaskController(){
         super(Task)
     }
+*/
 
     def index() {}
+
+    def show(String projectId, String taskId){
+        println("TaskController: params.projectId: ${params} , ${projectId}")
+
+        def loggedUser = springSecurityService?.currentUser
+        def project = Project.findById(projectId)
+        def dataMap = [:]
+        def task = null;
+
+        if(project){
+            task = Task.findByIdAndProject(taskId, project)
+        }
+
+        if(task){
+            //task.setProject(project)
+            def comments = Comment.findAllByTask(project)
+            println("comments: ${comments}")
+            task.comments = comments;
+
+        }
+
+        println("task  : ${task as JSON}")
+
+        dataMap.task = task
+        dataMap.project= project
+        render dataMap as JSON
+    }
 
     def projectTasks (){
 
@@ -43,7 +75,7 @@ class TaskController extends RestfulController {
     }
 
     def save(String taskData){
-
+        def loggedUser = springSecurityService?.currentUser
         println("save params: ${params}, ${taskData}, ${request.JSON}")
         Task task = new Task();
         task.title = request.JSON.title
@@ -51,7 +83,7 @@ class TaskController extends RestfulController {
         task.project = Project.findById(request.JSON.projectId)
         task.priority = PriorityEnum.find { it.toString() == request.JSON.priority.name}
         task.status = StatusEnum.find { it.toString() == request.JSON.status.name}
-        task.reportedBy = Person.findById(1)
+        task.reportedBy = loggedUser
         task.assignedTo = Person.findById(request.JSON.assignedTo.id)
         task.save(failOnError: true)
 

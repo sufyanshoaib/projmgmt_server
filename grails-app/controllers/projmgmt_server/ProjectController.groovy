@@ -14,7 +14,7 @@ class ProjectController /*extends RestfulController*/{
         super(Project)
     }*/
 
-    /*static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE", comments: "POST"]*/
+    static allowedMethods = [save: "POST"/*, update: "PUT", delete: "DELETE"*/]
 
     def index(){
         println('in index')
@@ -40,6 +40,22 @@ class ProjectController /*extends RestfulController*/{
             project.tasks = tasks
         }
         println("project   dd: ${project as JSON}")
-        render project?:[:] as JSON
+        respond project?:[:] as JSON
+    }
+
+
+    def save(String data){
+        println("save params: ${params}, ${data}, ${request.JSON}")
+        log.info("Saving Project.. ")
+        def loggedUser = springSecurityService?.currentUser
+
+        Project project = new Project();
+        project.name = request.JSON.name
+        project.description = request.JSON.description
+        project.owner = loggedUser
+        project.save(failOnError: true)
+
+
+        respond project;
     }
 }

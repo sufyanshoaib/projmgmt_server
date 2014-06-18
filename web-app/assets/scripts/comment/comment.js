@@ -6,9 +6,9 @@
  * To change this template use File | Settings | File Templates.
  */
 
-var taskController = angular.module('pmApp'/*, ['ProjectService']*/);
+var commentController = angular.module('pmApp'/*, ['ProjectService']*/);
 
-taskController.controller('TaskCreateController', ['$scope', '$routeParams', '$location', 'ProjectService', 'TaskService', 'PersonService',
+commentController.controller('CommentCreateController', ['$scope', '$routeParams', '$location', 'ProjectService', 'TaskService', 'PersonService',
     function ($scope, $routeParams, $location, ProjectService, TaskService, PersonService) {
         console.log('project list function')
         /*$scope.project = ProjectService.Project.get({projectId: $routeParams.projectId}, function () {
@@ -23,6 +23,8 @@ taskController.controller('TaskCreateController', ['$scope', '$routeParams', '$l
             $scope.task = task
             $scope.assignees = PersonService.Persons.query()
         });
+
+
         /*$scope.update = function(task) {
             $scope.task = angular.copy(task);
         };*/
@@ -39,16 +41,4 @@ taskController.controller('TaskCreateController', ['$scope', '$routeParams', '$l
         }
 
         console.log("Loading projects ", $scope.project);
-    }]);
-
-taskController.controller('TaskDetailController', ['$scope', '$routeParams', '$location', 'ProjectService', 'TaskService', 'PersonService',
-    function ($scope, $routeParams, $location, ProjectService, TaskService, PersonService) {
-
-        $scope.task = TaskService.Task.get({projectId: $routeParams.projectId, taskId: $routeParams.taskId}, function () {
-            //console.log("Project object", project.id)
-        });
-        /*$scope.tasks = TaskService.Tasks.query({projectId: $routeParams.projectId}, function () {
-            //console.log("Project object", project.id)
-        });*/
-        console.log("Loading task: ", $scope.task);
     }]);

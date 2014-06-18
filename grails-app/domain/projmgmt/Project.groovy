@@ -24,4 +24,16 @@ class Project implements Serializable{
     }
 
 
+    @Override
+    public java.lang.String toString() {
+        return "Project{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", owner=" + owner +
+                ", dateCreated=" + dateCreated +
+                ", tasks=" + tasks +
+                ", version=" + version +
+                '}';
+    }
 }

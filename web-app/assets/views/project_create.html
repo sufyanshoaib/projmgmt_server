@@ -1,0 +1,21 @@
+<div class="panel panel-default" ng-controller="ProjectCreateController">
+    <div class="panel-heading">Create Project</div>
+    <div class="panel-body">
+        <form name="taskForm" novalidate ng-submit="projectSubmit()" class="form-horizontal ng-valid ng-dirty" > <!--ng-controller="TaskFormController"-->
+            <div class="form-group">
+                <label for="title" class="col-md-2">Name</label>
+                <div class="col-md-10">
+                    <input id="title" name="title" type="text"  ng-model="project.name" >
+                    <!--ng-class="{'ng-invalid': taskForm.title.$invalid }"-->
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="description" class="col-md-2">Description</label>
+                <div class="col-md-10"><input id="description" name="project.description" type="text" ng-model="project.description" ></div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" data-loading-text="Saving.."  >Submit</button>
+            <!--ng-disabled="form.$invalid"-->
+        </form>
+    </div>
+</div>

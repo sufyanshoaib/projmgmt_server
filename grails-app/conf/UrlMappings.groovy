@@ -9,9 +9,10 @@ class UrlMappings {
         "/person" (controller: "person") {
             action = [GET: "index", POST: "save"]
         }
-        "/api/project/$projectId/tasks" (controller: 'task', action: 'projectTasks')
-        "/api/project" (resources: 'project')
-        "/api/task" (resources: 'task')
+        "/api/projects/$projectId/tasks" (controller: 'task', action: 'projectTasks')
+        "/api/projects/$projectId/tasks/${taskId}" (controller: 'task', action: 'show')
+        "/api/projects" (resources: 'project')
+        "/api/tasks" (resources: 'task')
 
 		"/"(view:"/index")
 		"500"(view:'/error')

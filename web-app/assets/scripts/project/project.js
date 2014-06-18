@@ -30,8 +30,26 @@ projectController.controller('ProjectDetailController', ['$scope', '$routeParams
             //console.log("Project object", project.id)
         });
         console.log($routeParams.projectId)
-        $scope.tasks = TaskService.Task.query({projectId: $routeParams.projectId}, function () {
+        $scope.tasks = TaskService.Tasks.query({projectId: $routeParams.projectId}, function () {
             //console.log("Project object", project.id)
         });
+        console.log("Loading projects ", $scope.project);
+    }]);
+
+
+projectController.controller('ProjectCreateController', ['$scope', '$routeParams', '$location', 'ProjectService',
+    function ($scope, $routeParams, $location, ProjectService) {
+        /*$scope.update = function(project) {
+         $scope.project = angular.copy(project);
+         };*/
+
+        $scope.projectSubmit = function(){
+            var newProject = ProjectService.SaveProject.save($scope.project);
+            console.log("newProject: " + newProject)
+            //if(newTask && newTask.id > 0){
+            $location.path('projects');
+            //};
+        }
+
         console.log("Loading projects ", $scope.project);
     }]);

@@ -11,7 +11,7 @@ class Comment implements Serializable{
 
     String description
     Person commentBy
-    Date createdDate
+    Date dateCreated
     Task task
 
     static constraints = {

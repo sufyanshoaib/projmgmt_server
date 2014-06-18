@@ -32,6 +32,9 @@ pmApp.config(['$routeProvider',
             .when('/projects', {
                 templateUrl: 'assets/views/project_list.html',
                 controller: "ProjectList"})
+            .when('/projects/create', {
+                templateUrl: 'assets/views/project_create.html',
+                controller: "ProjectCreateController"})
             .when('/projects/:projectId', {
                 templateUrl: 'assets/views/project_detail.html' ,
                 controller: 'ProjectDetailController'
@@ -40,7 +43,10 @@ pmApp.config(['$routeProvider',
                 templateUrl: 'assets/views/task_create.html' ,
                 controller: 'TaskCreateController'
             })
-
+            .when('/projects/:projectId/tasks/:taskId', {
+                templateUrl: 'assets/views/task_detail.html' ,
+                controller: 'TaskDetailController'
+            })
             .otherwise( {redirectTo : '/'})
     }]
 );
@@ -74,6 +80,20 @@ pmApp.run(['$rootScope', '$http', '$location',
             sessionStorage.clear();
             $location.path("/login")
         });
+        $rootScope.$on('event:auth-loginSuccess', function () {
+            console.log('loginSuccess');
+        });
+        $rootScope.$on('event:auth-logoutSuccess', function () {
+            console.log('logout-success');
+        });
+        $rootScope.$on('event:auth-notAuthenticated', function () {
+            console.log('not-authenticated');
+        });
+        $rootScope.$on('event:auth-notAuthorized', function () {
+            console.log('not-authorized');
+        });
+
+
     }]);
 function getLocalToken() {
     console.log("gett local token:" + sessionStorage["authToken"])
@@ -93,8 +113,9 @@ function setCurrentUser(value) {
     console.log("setting local currentUser:" + value)
 }
 
-function getHttpConfig() {
+function getHttpConfig(nocache) {
     return {
+        cache: false,
         headers: {
             'X-Auth-Token': getLocalToken()
         }

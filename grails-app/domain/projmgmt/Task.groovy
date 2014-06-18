@@ -16,6 +16,10 @@ class Task implements  Serializable{
     Person reportedBy
     Person assignedTo
     Date dateCreated
+    List<Comment> comments;
+    Project project
+
+    static hasMany = ['comments']
 
     static embedded = ['reportedBy', 'assignedTo']
 

@@ -30,7 +30,7 @@
 
             <div class="form-group">
                 <label for="description" class="col-md-2">Assigned To</label>
-                <div class="col-md-10"><select id="assignedTo" ng-model="task.assignedTo" ng-options="assignee.name for assignee in assignees" ></select></div>
+                <div class="col-md-10"><select id="assignedTo" ng-model="task.assignedTo" ng-options="assignee.username for assignee in assignees" ></select></div>
             </div>
 
             <button type="submit" class="btn btn-primary" data-loading-text="Saving.."  >Submit</button>

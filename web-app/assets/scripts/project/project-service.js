@@ -16,8 +16,9 @@ projectService.factory('ProjectService', ['$resource',
     function ($resource) {
          //console.log('loading ProjectService')
         return {
-            AllProjects: $resource('api/project', {}, getHttpConfig()),
-            Project: $resource('api/project/:projectId', {projectId: '@projectId'}, getHttpConfig())
+            AllProjects: $resource('api/project', {}, getHttpConfig(), {cache:false}),
+            Project: $resource('api/project/:projectId', {projectId: '@projectId'}, getHttpConfig()),
+            SaveProject: $resource('api/project/', {}, {save: {method: 'POST' }}, getHttpConfig())
             /*PostComments: $resource('v1/posts/:postId/comments', {postId: '@id'}),
             PostTags: $resource('v1/posts/tags/:tag', {tag: '@id'})*/
         };
