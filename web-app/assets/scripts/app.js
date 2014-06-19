@@ -47,6 +47,10 @@ pmApp.config(['$routeProvider',
                 templateUrl: 'assets/views/task_detail.html' ,
                 controller: 'TaskDetailController'
             })
+            .when('/projects/:projectId/tasks/:taskId/comment/create', {
+                templateUrl: 'assets/views/comment_create.html' ,
+                controller: 'CommentCreateController'
+            })
             .otherwise( {redirectTo : '/'})
     }]
 );
@@ -113,7 +117,7 @@ function setCurrentUser(value) {
     console.log("setting local currentUser:" + value)
 }
 
-function getHttpConfig(nocache) {
+function getHttpConfig() {
     return {
         cache: false,
         headers: {

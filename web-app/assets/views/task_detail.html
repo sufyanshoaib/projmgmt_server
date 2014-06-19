@@ -1,20 +1,19 @@
 <div class="row clearfix">
     <div class="col-md-12 column">
         <div class="panel panel-default">
-            <div class="panel-heading">{{task.project.name}}, {{task.title}} </div>
+            <div class="panel-heading">Project: {{project.name}} </br> Task: {{task.title}} </div>
             <div class="list-group-item1">
                 <dl class="dl-horizontal">
-                    <dt>Owner</dt><dd>{{task.project.owner.name}}&nbsp;</dd>
                     <dt>Description</dt><dd>{{task.description}}&nbsp;</dd>
                     <dt>Assigned To:</dt><dd>{{task.assignedTo.username}}&nbsp;</dd>
                     <dt>Reported By:</dt><dd>{{task.reportedBy.username}}&nbsp;</dd>
-                    <dt>Created Date</dt><dd>{{task.project.dateCreated}}&nbsp;</dd>
+                    <dt>Created Date</dt><dd>{{project.dateCreated}}&nbsp;</dd>
                 </dl>
             </div>
         </div>
 
         <div class="panel panel-default">
-            <div class="panel-heading">Comments <span ng-show="tasks != null">({{comments.length}})</span><span class="pull-right"><a ng-href="#/projects/{{project.id}}/tasks/{{task.id}}/comment/create">Create Comment</span> </div>
+            <div class="panel-heading">Comments <span ng-show="comments != null">({{comments.length}})</span><span class="pull-right"><a ng-href="#/projects/{{project.id}}/tasks/{{task.id}}/comment/create">Create Comment</span> </div>
             <!--<a href="#" class="list-group-item active">Projects</a>-->
 
             <table class="table">
@@ -22,14 +21,14 @@
                 <tr>
                     <th>#</th>
                     <th>Comment</th>
-                    <th>Comment By</th>
+                   <!-- <th>Comment By</th>-->
                 </tr>
                 </thead>
                 <tbody>
                 <tr ng-repeat="comment in comments">
                     <td>{{comment.id}}</td>
                     <td>{{comment.description}}</td>
-                    <td>{{comment.commentBy.username}}</td>
+                    <!--<td>{{comment.commentBy.username}}</td>-->
                 </tr>
                 </tbody>
             </table>

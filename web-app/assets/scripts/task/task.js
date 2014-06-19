@@ -44,8 +44,11 @@ taskController.controller('TaskCreateController', ['$scope', '$routeParams', '$l
 taskController.controller('TaskDetailController', ['$scope', '$routeParams', '$location', 'ProjectService', 'TaskService', 'PersonService',
     function ($scope, $routeParams, $location, ProjectService, TaskService, PersonService) {
 
-        $scope.task = TaskService.Task.get({projectId: $routeParams.projectId, taskId: $routeParams.taskId}, function () {
-            //console.log("Project object", project.id)
+        var data = TaskService.Task.get({projectId: $routeParams.projectId, taskId: $routeParams.taskId}, function (data) {
+            //console.log("Project object", data.project)
+            $scope.project = data.project
+            $scope.task = data.task
+            $scope.comments = data.comments
         });
         /*$scope.tasks = TaskService.Tasks.query({projectId: $routeParams.projectId}, function () {
             //console.log("Project object", project.id)

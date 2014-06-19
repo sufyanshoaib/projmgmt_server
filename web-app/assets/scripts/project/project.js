@@ -14,17 +14,17 @@ var projectController = angular.module('pmApp' /*, ['ProjectService']*/);
 
 projectController.controller('ProjectList', ['$scope', 'ProjectService',
     function ($scope, ProjectService) {
-        console.log('project list function ' + ProjectService.AllProjects)
+        //console.log('project list function ' + ProjectService.AllProjects)
         $scope.projects = ProjectService.AllProjects.query();
         //$scope.orderProp = 'title';
 
-        console.log("Loading projects ", $scope.projects);
+        //console.log("Loading projects ", $scope.projects);
 }]);
 
 
 projectController.controller('ProjectDetailController', ['$scope', '$routeParams', 'ProjectService', 'TaskService',
     function ($scope, $routeParams, ProjectService, TaskService) {
-        console.log('project get function ' + ProjectService.AllProjects)
+        //console.log('project get function ' + ProjectService.AllProjects)
 
         $scope.project = ProjectService.Project.get({projectId: $routeParams.projectId}, function () {
             //console.log("Project object", project.id)

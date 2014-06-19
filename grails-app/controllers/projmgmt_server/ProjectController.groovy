@@ -33,7 +33,7 @@ class ProjectController /*extends RestfulController*/{
         println("springSecurityService: ${springSecurityService?.currentUser}")
         def loggedUser = springSecurityService?.currentUser
 
-        def project = Project.findByIdAndOwner(params.id, loggedUser)
+        def project = Project.findByIdAndOwner(projectId, loggedUser)
         if(project){
             def tasks = Task.findAllByProject(project)
             println("tasks: ${tasks}")

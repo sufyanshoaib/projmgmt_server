@@ -10,18 +10,12 @@ import projmgmt.StatusEnum
 import projmgmt.Task
 import projmgmt.Comment
 
-class TaskController /*extends RestfulController*/ {
+class TaskController {
     static responseFormats = ['json', 'xml']
 
     def springSecurityService
 
-    static allowedMethods = [save: "POST" , show: "GET" /*, update: "PUT", delete: "DELETE", comments: "POST"*/]
-/*
-
-    TaskController(){
-        super(Task)
-    }
-*/
+    /*static allowedMethods = [save: "POST" , show: "GET"]*/
 
     def index() {}
 
@@ -39,16 +33,18 @@ class TaskController /*extends RestfulController*/ {
 
         if(task){
             //task.setProject(project)
-            def comments = Comment.findAllByTask(project)
+            def comments = Comment.findAllByTask(task)
             println("comments: ${comments}")
-            task.comments = comments;
+            dataMap.comments = comments;
 
         }
 
-        println("task  : ${task as JSON}")
 
         dataMap.task = task
         dataMap.project= project
+
+
+        println("dataMap  : ${dataMap as JSON}")
         render dataMap as JSON
     }
 

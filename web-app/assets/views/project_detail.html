@@ -4,7 +4,7 @@
             <div class="panel-heading">{{project.name}} </div>
             <div class="list-group-item1">
                 <dl class="dl-horizontal">
-                    <dt>Owner</dt><dd>{{project.owner.name}}&nbsp;</dd>
+                    <dt>Owner</dt><dd>{{project.owner.username}}&nbsp;</dd>
                     <dt>Created Date</dt><dd>{{project.dateCreated}}&nbsp;</dd>
                 </dl>
             </div>
@@ -26,11 +26,11 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="task in tasks">
-                    <td><a href="#/projects/{{project.id}}">{{task.id}}</a></td>
-                    <td><a href="#/projects/{{project.id}}">{{task.title}}</a></td>
-                    <td><a href="#/projects/{{project.id}}">{{task.assignedTo.username}}</a></td>
-                    <td><a href="#/projects/{{project.id}}">{{task.status.name}}</a></td>
-                    <td><a href="#/projects/{{project.id}}">{{task.priority.name}}</a></td>
+                    <td><a href="#/projects/{{project.id}}/tasks/{{task.id}}">{{task.id}}</a></td>
+                    <td><a href="#/projects/{{project.id}}/tasks/{{task.id}}">{{task.title}}</a></td>
+                    <td><a href="#/projects/{{project.id}}/tasks/{{task.id}}">{{task.assignedTo.username}}</a></td>
+                    <td><a href="#/projects/{{project.id}}/tasks/{{task.id}}">{{task.status.name}}</a></td>
+                    <td><a href="#/projects/{{project.id}}/tasks/{{task.id}}">{{task.priority.name}}</a></td>
                 </tr>
                 </tbody>
             </table>

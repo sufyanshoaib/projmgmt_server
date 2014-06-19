@@ -12,15 +12,15 @@
 
 var commentService = angular.module('pmApp');
 
-commentService.factory('TaskService', ['$resource',
+commentService.factory('CommentService', ['$resource',
     function ($resource) {
         //console.log('loading ProjectService')
         return {
-            Comments: $resource('api/project/:projectId/tasks/:taskId/comments', {projectId: '@projectId', taskId: '@taskId'}, getHttpConfig()),
+            Comments: $resource('api/project/:projectId/task/:taskId/comment', {projectId: '@projectId', taskId: '@taskId'}, getHttpConfig()),
             /*PostComments: $resource('v1/posts/:postId/comments', {postId: '@id'}),
              PostTags: $resource('v1/posts/tags/:tag', {tag: '@id'})*/
-            SaveTask: $resource('api/task/', {}, {save: {method: 'POST' }}, getHttpConfig()),
-            CreateTask: $resource('api/task/create', {projectId: '@projectId'}, getHttpConfig() )
+            SaveComment: $resource('api/comment/', {}, {save: {method: 'POST' }}, getHttpConfig()),
+            //CreateComment: $resource('api/comment/create', {taskId: '@taskId'}, getHttpConfig() )
         };
 
     }]);

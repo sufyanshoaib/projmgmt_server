@@ -70,8 +70,11 @@
 <script src="assets/scripts/project/project-service.js"></script>
 <script src="assets/scripts/task/task.js"></script>
 <script src="assets/scripts/task/task-service.js"></script>
+<script src="assets/scripts/comment/comment.js"></script>
+<script src="assets/scripts/comment/comment-service.js"></script>
 <script src="assets/scripts/person/person-service.js"></script>
 <script src="assets/scripts/security/auth.js"></script>
+
 <!-- endbuild -->
 </body>
 </html>

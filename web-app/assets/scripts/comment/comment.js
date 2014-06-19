@@ -8,37 +8,30 @@
 
 var commentController = angular.module('pmApp'/*, ['ProjectService']*/);
 
-commentController.controller('CommentCreateController', ['$scope', '$routeParams', '$location', 'ProjectService', 'TaskService', 'PersonService',
-    function ($scope, $routeParams, $location, ProjectService, TaskService, PersonService) {
-        console.log('project list function')
+commentController.controller('CommentCreateController', ['$scope', '$routeParams', '$location', 'ProjectService', 'TaskService', 'CommentService',
+    function ($scope, $routeParams, $location, ProjectService, TaskService, CommentService) {
+
         /*$scope.project = ProjectService.Project.get({projectId: $routeParams.projectId}, function () {
             //console.log("Project object", project.id)
         });*/
 
-        var taskData = TaskService.CreateTask.get({projectId: $routeParams.projectId}, function (taskData) {
-            $scope.project = taskData.project
-            $scope.priorities = taskData.priorities
-            $scope.statuses = taskData.statuses
-            var task = {priority: $scope.priorities[0], status: $scope.statuses[0]}
-            $scope.task = task
-            $scope.assignees = PersonService.Persons.query()
+        /*var data = CommentService.CreateComment.get({taskId: $routeParams.taskId}, function (data) {
+            $scope.task = data.task
+        });*/
+        var data = TaskService.Task.get({projectId: $routeParams.projectId, taskId: $routeParams.taskId}, function (data) {
+            $scope.task = data.task
         });
-
 
         /*$scope.update = function(task) {
             $scope.task = angular.copy(task);
         };*/
 
-        $scope.taskSubmit = function(taskForm){
-            console.log("$scope.task:" + TaskService)
-            //$scope.saveTask = function () {
-            $scope.task.projectId = $routeParams.projectId;
-            var newTask = TaskService.SaveTask.save($scope.task);
-            console.log("newTask: " + newTask)
-            //if(newTask && newTask.id > 0){
-                $location.path('projects/' + $routeParams.projectId);
-            //};
-        }
+        $scope.commentSubmit = function(form){
 
-        console.log("Loading projects ", $scope.project);
+            $scope.comment.taskId = $routeParams.taskId;
+            var comment = CommentService.SaveComment.save($scope.comment);
+            console.log("comment: " + comment)
+            $location.path('projects/' + $routeParams.projectId + '/tasks/' + $routeParams.taskId );
+
+        }
     }]);

@@ -126,8 +126,6 @@ grails.plugin.springsecurity.rest.token.storage.gorm.tokenValuePropertyName = 't
 grails.plugin.springsecurity.rest.token.storage.gorm.usernamePropertyName = 'username'
 
 grails.plugin.springsecurity.filterChain.chainMap = [
-        /*'/auth/api*//**': 'JOINED_FILTERS,-exceptionTranslationFilter,-authenticationProcessingFilter,-securityContextPersistenceFilter',  // Stateless chain*/
         '/api/**': 'JOINED_FILTERS,-exceptionTranslationFilter,-authenticationProcessingFilter,-securityContextPersistenceFilter',  // Stateless chain
-        /*'/auth/api*//**': 'JOINED_FILTERS,-restTokenValidationFilter,-restExceptionTranslationFilter',                                          // Traditional chain*/
         '/**': 'JOINED_FILTERS,-restTokenValidationFilter,-restExceptionTranslationFilter'                                          // Traditional chain
 ]
