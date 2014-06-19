@@ -1,16 +1,21 @@
 package projmgmt_server
 
+import grails.rest.RestfulController
 import projmgmt.Person
 import projmgmt.Project
 import projmgmt.Task
 import projmgmt.Comment
 
-class CommentController {
+class CommentController extends RestfulController<Comment>{
 
     static responseFormats = ['json', 'xml']
-    static allowedMethods = [save: "POST" , show: "GET"]
+    //static allowedMethods = [save: "POST" , show: "GET"]
 
     def springSecurityService
+
+    CommentController() {
+        super(Comment)
+    }
 
     def create(String taskId){
         println("comment create params: ${params}, ${taskId}, ${request.JSON}")
@@ -28,9 +33,15 @@ class CommentController {
         comment.task = Task.findById(request.JSON.taskId)
 
         comment.save(failOnError: true)
+        respond comment, [status: 200];
+    }
 
 
-        respond comment;
+    def delete(){
+        println('delete: ${params}')
+        Comment comment = Comment.get(params.id)
+        comment.delete(flush: true)
+        render status : 200
     }
 
 }

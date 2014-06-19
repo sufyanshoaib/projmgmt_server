@@ -10,17 +10,26 @@ import projmgmt.StatusEnum
 import projmgmt.Task
 import projmgmt.Comment
 
-class TaskController {
+class TaskController extends RestfulController<Task>{
     static responseFormats = ['json', 'xml']
 
     def springSecurityService
 
+    TaskController(){
+        super(Task)
+    }
     /*static allowedMethods = [save: "POST" , show: "GET"]*/
 
-    def index() {}
+    def index() {
+        println("Task > index > ${params}")
+        def project = Project.findById(params.projectId)
+        def tasks = Task.findAllByProject(project)
+
+        render tasks as JSON
+    }
 
     def show(String projectId, String taskId){
-        println("TaskController: params.projectId: ${params} , ${projectId}")
+        println("Task > show> params.projectId: ${params} , ${projectId}")
 
         def loggedUser = springSecurityService?.currentUser
         def project = Project.findById(projectId)
@@ -30,6 +39,7 @@ class TaskController {
         if(project){
             task = Task.findByIdAndProject(taskId, project)
         }
+/*
 
         if(task){
             //task.setProject(project)
@@ -38,6 +48,7 @@ class TaskController {
             dataMap.comments = comments;
 
         }
+*/
 
 
         dataMap.task = task
@@ -45,7 +56,7 @@ class TaskController {
 
 
         println("dataMap  : ${dataMap as JSON}")
-        render dataMap as JSON
+        respond task
     }
 
     def projectTasks (){

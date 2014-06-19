@@ -30,10 +30,10 @@ projectController.controller('ProjectDetailController', ['$scope', '$routeParams
             //console.log("Project object", project.id)
         });
         console.log($routeParams.projectId)
-        $scope.tasks = TaskService.Tasks.query({projectId: $routeParams.projectId}, function () {
-            //console.log("Project object", project.id)
+        $scope.tasks = TaskService.Tasks.query({projectId: $routeParams.projectId}, function (data) {
+            console.log("tasks object" + data.length)
         });
-        console.log("Loading projects ", $scope.project);
+        console.log("Loading tasks ", $scope.tasks);
     }]);
 
 

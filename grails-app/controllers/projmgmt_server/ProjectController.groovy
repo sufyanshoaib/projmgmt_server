@@ -4,43 +4,39 @@ import grails.converters.JSON
 import grails.rest.RestfulController
 import projmgmt.*
 
-class ProjectController /*extends RestfulController*/{
+class ProjectController extends RestfulController<Project>{
 
     static responseFormats = ['json', 'xml']
 
     def springSecurityService
 
-   /* ProjectController(){
+    ProjectController(){
         super(Project)
-    }*/
+    }
 
-    static allowedMethods = [save: "POST"/*, update: "PUT", delete: "DELETE"*/]
+    //static allowedMethods = [save: "POST"/*, update: "PUT", delete: "DELETE"*/]
 
-    def index(){
-        println('in index')
+    def index(String projectId){
+        println('Project > index')
         def loggedUser = springSecurityService?.currentUser
 
         render Project.findAllByOwner(loggedUser) as JSON
+
     }
 
-    def show(String projectId){
-        println("params.projectId: ${params} , ${projectId}")
-        /*def project = Project.collection.findOne(id: projectId)
-        project = project as Project
-        //render project?:"" as JSON
-        respond project*/
+    def show(){
+        println("Project > show > params.projectId: ${params}")
 
-        println("springSecurityService: ${springSecurityService?.currentUser}")
         def loggedUser = springSecurityService?.currentUser
 
-        def project = Project.findByIdAndOwner(projectId, loggedUser)
-        if(project){
+        def project = Project.findByIdAndOwner(params.id, loggedUser)
+       /* if(project){
             def tasks = Task.findAllByProject(project)
             println("tasks: ${tasks}")
             project.tasks = tasks
-        }
-        println("project   dd: ${project as JSON}")
-        respond project?:[:] as JSON
+        }*/
+        println("project : ${project}")
+        respond project
     }
 
 

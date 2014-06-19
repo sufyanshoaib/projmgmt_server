@@ -41,14 +41,15 @@ taskController.controller('TaskCreateController', ['$scope', '$routeParams', '$l
         console.log("Loading projects ", $scope.project);
     }]);
 
-taskController.controller('TaskDetailController', ['$scope', '$routeParams', '$location', 'ProjectService', 'TaskService', 'PersonService',
-    function ($scope, $routeParams, $location, ProjectService, TaskService, PersonService) {
+taskController.controller('TaskDetailController', ['$scope', '$routeParams', '$location', 'ProjectService',
+    'TaskService', 'PersonService', 'CommentService',
+    function ($scope, $routeParams, $location, ProjectService, TaskService, PersonService, CommentService) {
 
         var data = TaskService.Task.get({projectId: $routeParams.projectId, taskId: $routeParams.taskId}, function (data) {
             //console.log("Project object", data.project)
             $scope.project = data.project
             $scope.task = data.task
-            $scope.comments = data.comments
+            $scope.comments = CommentService.Comments.get({projectId: $routeParams.projectId, taskId: $routeParams.taskId})
         });
         /*$scope.tasks = TaskService.Tasks.query({projectId: $routeParams.projectId}, function () {
             //console.log("Project object", project.id)
